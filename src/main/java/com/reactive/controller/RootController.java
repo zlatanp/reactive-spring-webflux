@@ -26,7 +26,7 @@ public class RootController {
 
     @GetMapping(path = "/mono", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getMonoName() {
-        var names = fluxAndMonoGeneratorService.nameMono()
+        var names = fluxAndMonoGeneratorService.namesMono()
                 .subscribe(name -> {
                 });
 
