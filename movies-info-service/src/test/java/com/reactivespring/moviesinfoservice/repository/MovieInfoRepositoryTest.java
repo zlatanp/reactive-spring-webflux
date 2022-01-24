@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)
 class MovieInfoRepositoryTest {
 
-    @Autowired
-    MovieInfoRepository movieInfoRepository;
-
     /*
         Integration tests
      */
+
+    @Autowired
+    MovieInfoRepository movieInfoRepository;
 
     @BeforeEach
     void setUp() {
@@ -109,6 +109,28 @@ class MovieInfoRepositoryTest {
 
         StepVerifier.create(movieInfos)
                 .expectNextCount(2)
+                .verifyComplete();
+
+    }
+
+    @Test
+    void findMovieInfoByYear() {
+
+        var movieInfosFlux = movieInfoRepository.findByYear(2005).log();
+
+        StepVerifier.create(movieInfosFlux)
+                .expectNextCount(1)
+                .verifyComplete();
+
+    }
+
+    @Test
+    void findByName() {
+
+        var movieInfosMono = movieInfoRepository.findByName("Batman Begins").log();
+
+        StepVerifier.create(movieInfosMono)
+                .expectNextCount(1)
                 .verifyComplete();
 
     }
