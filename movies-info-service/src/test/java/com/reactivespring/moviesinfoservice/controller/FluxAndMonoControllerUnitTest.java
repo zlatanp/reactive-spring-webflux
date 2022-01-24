@@ -11,14 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @WebFluxTest(controllers = FluxAndMonoController.class)
 @AutoConfigureWebTestClient
-class FluxAndMonoControllerTest {
+class FluxAndMonoControllerUnitTest {
 
     @Autowired
     WebTestClient webTestClient;
-
-    /*
-        Unit tests
-     */
 
     @Test
     void flux() {

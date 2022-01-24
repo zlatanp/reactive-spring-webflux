@@ -18,11 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataMongoTest
 @ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)
-class MovieInfoRepositoryTest {
-
-    /*
-        Integration tests
-     */
+class MovieInfoRepositoryIntTest {
 
     @Autowired
     MovieInfoRepository movieInfoRepository;

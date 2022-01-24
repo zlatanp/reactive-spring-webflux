@@ -22,11 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ImportAutoConfiguration(exclude = EmbeddedMongoAutoConfiguration.class)
 @AutoConfigureWebTestClient
-class MoviesInfoControllerTest {
-
-    /*
-        Integration tests
-     */
+class MoviesInfoControllerIntTest {
 
     @Autowired
     private WebTestClient webTestClient;
