@@ -34,12 +34,6 @@ public class MoviesInfoController {
         return moviesInfoService.getAllMovieInfos();
     }
 
-    /*@GetMapping("/movieinfos/{id}")
-    public Mono<MovieInfo> getMovieInfoById(@PathVariable String id) {
-        return moviesInfoService.getMovieInfoById(id);
-    }
-*/
-
     @GetMapping(value = "/movieinfos/stream", produces = MediaType.APPLICATION_NDJSON_VALUE)
     public Flux<MovieInfo> streamMovieInfos() {
 
@@ -50,8 +44,7 @@ public class MoviesInfoController {
     public Mono<ResponseEntity<MovieInfo>> getMovieInfoById_approach2(@PathVariable("id") String id) {
 
         return moviesInfoService.getMovieInfoById(id)
-                .map(movieInfo1 -> ResponseEntity.ok()
-                        .body(movieInfo1))
+                .map(mi -> ResponseEntity.ok().body(mi))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()))
                 .log();
     }
@@ -63,22 +56,13 @@ public class MoviesInfoController {
                 .doOnNext(savedMovieInfo -> movieInfoSink.tryEmitNext(savedMovieInfo));
     }
 
-
-
-   /* @PutMapping("/movieinfos/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Mono<MovieInfo> updateMovieInfo(@RequestBody MovieInfo movieInfo, @PathVariable String id) {
-        return moviesInfoService.updateMovieInfo(movieInfo, id);
-    }*/
-
     @PutMapping("/movieinfos/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<MovieInfo>> updateMovieInfo(@RequestBody MovieInfo movieInfo, @PathVariable String id) {
 
         var updatedMovieInfoMono = moviesInfoService.updateMovieInfo(movieInfo, id);
         return updatedMovieInfoMono
-                .map(movieInfo1 -> ResponseEntity.ok()
-                        .body(movieInfo1))
+                .map(mi -> ResponseEntity.ok().body(mi))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 
     }
